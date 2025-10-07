@@ -1,0 +1,219 @@
+.toolSection {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  line-height: 1.5;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--foreground);
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--foreground);
+}
+
+.selectContainer {
+  background: var(--gray-alpha-100);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.playerButtons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.playerButton {
+  width: 120px;
+  height: 120px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  background: var(--foreground);
+  color: var(--background);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.playerButton:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.playerButton:active {
+  transform: translateY(-2px);
+}
+
+.viewContainer {
+  background: var(--gray-alpha-100);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  flex-grow: 1;
+}
+
+.instruction {
+  font-size: 1.125rem;
+  color: var(--foreground);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.playerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.playerNumberButton {
+  width: 100%;
+  aspect-ratio: 1;
+  font-size: 2rem;
+  font-weight: 700;
+  border: 2px solid var(--foreground);
+  border-radius: 12px;
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.playerNumberButton:hover {
+  background: var(--gray-alpha-100);
+  transform: scale(1.05);
+}
+
+.playerNumberButton:active {
+  transform: scale(0.98);
+}
+
+.backButton {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid var(--foreground);
+  border-radius: 8px;
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backButton:hover {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.revealCard {
+  background: var(--background);
+  border-radius: 16px;
+  padding: 3rem 4rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  cursor: default;
+}
+
+.revealText {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--foreground);
+  text-align: center;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .selectContainer {
+    padding: 2rem 1rem;
+  }
+
+  .playerButtons {
+    gap: 1rem;
+  }
+
+  .playerButton {
+    width: 100px;
+    height: 100px;
+    font-size: 1.25rem;
+  }
+
+  .viewContainer {
+    padding: 1.5rem 1rem;
+  }
+
+  .instruction {
+    font-size: 1rem;
+  }
+
+  .playerGrid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 1rem;
+    max-width: 400px;
+  }
+
+  .playerNumberButton {
+    font-size: 1.5rem;
+  }
+
+  .revealCard {
+    padding: 2rem 2.5rem;
+    margin: 1rem;
+  }
+
+  .revealText {
+    font-size: 1.35rem;
+  }
+}
