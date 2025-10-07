@@ -27,13 +27,19 @@ export default function Navbar() {
         </button>
         <ul className={`${styles.navItems} ${isMenuOpen ? styles.open : ""}`}>
           <li>
-            <Link href="#intro">游戏简介</Link>
+            <Link href="#intro" onClick={() => setIsMenuOpen(false)}>
+              游戏简介
+            </Link>
           </li>
           <li>
-            <Link href="/rule">游戏规则</Link>
+            <Link href="#rule" onClick={() => setIsMenuOpen(false)}>
+              游戏规则
+            </Link>
           </li>
           <li>
-            <Link href="#tools">游戏工具</Link>
+            <Link href="#tools" onClick={() => setIsMenuOpen(false)}>
+              游戏工具
+            </Link>
           </li>
         </ul>
       </div>
