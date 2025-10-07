@@ -6,14 +6,7 @@
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
 
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  padding-top: 140px;
-  gap: 64px;
+  padding-top: 64px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,19 +21,7 @@
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
-}
-
-.main ol {
-  padding-left: 0;
-  margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  list-style-position: inside;
+  padding: 1rem 0;
 }
 
 .main li:not(:last-of-type) {
@@ -53,30 +34,6 @@
   padding: 2px 4px;
   border-radius: 4px;
   font-weight: 600;
-}
-
-.ctas {
-  display: flex;
-  gap: 16px;
-}
-
-.ctas a {
-  appearance: none;
-  border-radius: 128px;
-  height: 48px;
-  padding: 0 20px;
-  border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
 }
 
 a.primary {
@@ -125,30 +82,6 @@ a.secondary {
 }
 
 @media (max-width: 600px) {
-  .page {
-    padding: 32px;
-    padding-top: 100px;
-    padding-bottom: 80px;
-  }
-
-  .main {
-    align-items: center;
-  }
-
-  .main ol {
-    text-align: center;
-  }
-
-  .ctas {
-    flex-direction: column;
-  }
-
-  .ctas a {
-    font-size: 14px;
-    height: 40px;
-    padding: 0 16px;
-  }
-
   a.secondary {
     min-width: auto;
   }
@@ -171,6 +104,8 @@ a.secondary {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 1rem;
+  line-height: 1.5;
 }
 
 .sectionTitle {
@@ -215,8 +150,22 @@ a.secondary {
   font-weight: 500;
 }
 
-.ruleSection {
-  padding: 0 1rem;
+.ruleSection h2,
+.ruleSection h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.ruleSection ul,
+.ruleSection ol {
+  padding-inline-start: 20px;
+}
+
+.ruleSection table {
+  margin: 0.5rem 0;
+  width: 100%;
+  table-layout: fixed;
+  text-align: center;
 }
 
 @media (max-width: 600px) {

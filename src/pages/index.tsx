@@ -1,9 +1,10 @@
+import Navbar from "@/components/Navbar";
+import RuleContent from "@/components/Rule.mdx";
+import Tool from "@/components/Tool";
+import styles from "@/styles/Home.module.css";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
-import styles from "@/styles/Home.module.css";
-import RuleContent from "./rule.mdx";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("intro");
@@ -40,10 +41,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
       <div className={`${styles.page}`}>
+        <Navbar />
         <main className={styles.main}>
-          {activeSection === "intro" && (
+          {activeSection === "intro" ? (
             <section id="intro" className={styles.introSection}>
               <h1 className={styles.sectionTitle}>游戏简介</h1>
               <div className={styles.gameInfo}>
@@ -69,12 +70,13 @@ export default function Home() {
                 </div>
               </div>
             </section>
-          )}
-          {activeSection === "rule" && (
+          ) : activeSection === "rule" ? (
             <section id="rule" className={styles.ruleSection}>
               <RuleContent />
             </section>
-          )}
+          ) : activeSection === "tools" ? (
+            <Tool />
+          ) : null}
         </main>
         <footer className={styles.footer}></footer>
       </div>

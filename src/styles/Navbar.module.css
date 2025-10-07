@@ -10,8 +10,9 @@
 
 .navContainer {
   max-width: 1200px;
+  height: 64px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -67,7 +68,7 @@
 /* Mobile styles */
 @media (max-width: 768px) {
   .navContainer {
-    padding: 1rem;
+    padding: 0 1rem;
   }
 
   .menuButton {
