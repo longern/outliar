@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import LongPressButton from "@/components/LongPressButton";
 import styles from "@/styles/Tool.module.css";
 
@@ -10,19 +10,21 @@ export default function Tool() {
   const [revealedPlayer, setRevealedPlayer] = useState<number | null>(null);
   const [viewedPlayers, setViewedPlayers] = useState<Set<number>>(new Set());
 
-  useEffect(() => {
+  const generateOutliar = useCallback(() => {
     // Generate random outliar and fake outliar when entering view stage
-    if (stage === "view") {
-      const outliar = Math.floor(Math.random() * playerCount) + 1;
-      let fakeOutliar = Math.floor(Math.random() * playerCount) + 1;
-      while (fakeOutliar === outliar) {
-        fakeOutliar = Math.floor(Math.random() * playerCount) + 1;
-      }
-      setOutliarNumber(outliar);
-      setFakeOutliarNumber(fakeOutliar);
-      setViewedPlayers(new Set()); // Reset viewed players when entering view stage
+    const outliar = Math.floor(Math.random() * playerCount) + 1;
+    let fakeOutliar = Math.floor(Math.random() * playerCount) + 1;
+    while (fakeOutliar === outliar) {
+      fakeOutliar = Math.floor(Math.random() * playerCount) + 1;
     }
-  }, [stage, playerCount]);
+    setOutliarNumber(outliar);
+    setFakeOutliarNumber(fakeOutliar);
+    setViewedPlayers(new Set()); // Reset viewed players when entering view stage
+  }, [playerCount]);
+
+  useEffect(() => {
+    if (stage === "view") generateOutliar();
+  }, [stage, generateOutliar]);
 
   const handlePlayerCountSelect = (count: number) => {
     setPlayerCount(count);
@@ -77,29 +79,38 @@ export default function Tool() {
     <section className={styles.toolSection}>
       <h1 className={styles.sectionTitle}>身份查看</h1>
       <div className={styles.viewContainer}>
-        <p className={styles.instruction}>长按玩家编号1秒查看身份信息</p>
+        <p className={styles.instruction}>长按玩家编号查看身份信息</p>
         <div className={styles.playerGrid}>
           {Array.from({ length: playerCount }, (_, i) => i + 1).map(
             (playerNum) => (
               <LongPressButton
                 key={playerNum}
                 onLongPress={() => handleLongPress(playerNum)}
-                duration={1000}
+                duration={700}
                 disabled={viewedPlayers.has(playerNum)}
-                className={styles.playerNumberButton}
               >
                 {playerNum}
               </LongPressButton>
-            ),
+            )
           )}
         </div>
-        <button
-          type="button"
-          className={styles.backButton}
-          onClick={handleBackToSelect}
-        >
-          重新选择人数
-        </button>
+        <div className={styles.gameActions}>
+          <button
+            type="button"
+            className={styles.backButton}
+            onClick={handleBackToSelect}
+          >
+            重新选择人数
+          </button>
+          <button
+            type="button"
+            disabled={viewedPlayers.size === 0}
+            className={styles.backButton}
+            onClick={generateOutliar}
+          >
+            下一轮
+          </button>
+        </div>
       </div>
 
       {revealedPlayer !== null && (
@@ -110,7 +121,7 @@ export default function Tool() {
         >
           <div className={styles.revealCard}>
             <p className={styles.revealText}>
-              Outliar is number {getRevealedNumber(revealedPlayer)}.
+              “异类”是 {getRevealedNumber(revealedPlayer)} 号玩家
             </p>
           </div>
         </button>

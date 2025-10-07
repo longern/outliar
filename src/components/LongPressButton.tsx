@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styles from "@/styles/LongPressButton.module.css";
 
 interface LongPressButtonProps {
@@ -18,6 +18,7 @@ export default function LongPressButton({
 }: LongPressButtonProps) {
   const pressTimerRef = useRef<NodeJS.Timeout | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const [triggered, setTriggered] = useState(false);
 
   const handlePressStart = () => {
     if (disabled) return;
@@ -29,6 +30,8 @@ export default function LongPressButton({
 
     pressTimerRef.current = setTimeout(() => {
       onLongPress();
+      setTriggered(true);
+      setTimeout(() => setTriggered(false), 300);
       if (buttonRef.current) {
         buttonRef.current.classList.remove(styles.pressing);
       }
@@ -53,7 +56,9 @@ export default function LongPressButton({
     <button
       ref={buttonRef}
       type="button"
-      className={`${styles.longPressButton} ${className} ${disabled ? styles.disabled : ""}`}
+      className={`${styles.longPressButton} ${className} ${
+        disabled ? styles.disabled : ""
+      }`}
       disabled={disabled}
       onMouseDown={handlePressStart}
       onMouseUp={handlePressEnd}
@@ -63,7 +68,10 @@ export default function LongPressButton({
       onTouchCancel={handlePressCancel}
     >
       {children}
-      <div className={styles.progressBar} />
+      <div
+        className={`${styles.progressBar} ${triggered ? styles.triggered : ""}`}
+        style={{ transitionDuration: `${duration}ms` }}
+      />
     </button>
   );
 }

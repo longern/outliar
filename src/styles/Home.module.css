@@ -158,11 +158,12 @@ a.secondary {
 
 .ruleSection ul,
 .ruleSection ol {
+  margin: 0.7rem 0;
   padding-inline-start: 20px;
 }
 
 .ruleSection table {
-  margin: 0.5rem 0;
+  margin: 0.7rem 0;
   width: 100%;
   table-layout: fixed;
   text-align: center;

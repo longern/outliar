@@ -16,15 +16,6 @@
   -webkit-touch-callout: none;
 }
 
-.longPressButton:hover {
-  background: var(--gray-alpha-100);
-  transform: scale(1.05);
-}
-
-.longPressButton:active {
-  transform: scale(0.98);
-}
-
 .longPressButton.disabled {
   opacity: 0.4;
   cursor: not-allowed;
@@ -46,28 +37,38 @@
     rgba(var(--gray-rgb, 0, 0, 0), 0.3) 0%,
     rgba(var(--gray-rgb, 0, 0, 0), 0.2) 100%
   );
-  transition: none;
   z-index: 0;
   pointer-events: none;
+  transition: width 1s ease-in-out;
 }
 
 .longPressButton.pressing .progressBar {
-  animation: sweep 1s linear forwards;
-}
-
-@keyframes sweep {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 /* Ensure the button content is above the progress bar */
 .longPressButton > *:not(.progressBar) {
   position: relative;
   z-index: 1;
+}
+
+.progressBar.triggered {
+  animation: fade-out 0.3s linear forwards;
+}
+
+@keyframes fade-out {
+  from {
+    width: 100%;
+    opacity: 1;
+  }
+  99.999% {
+    width: 100%;
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+    width: 0;
+  }
 }
 
 @media (max-width: 600px) {

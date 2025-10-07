@@ -92,9 +92,9 @@
   margin-bottom: 2rem;
 }
 
-.playerNumberButton {
-  /* Additional styles specific to player number buttons in Tool component */
-  /* Base styles are now in LongPressButton.module.css */
+.gameActions {
+  display: flex;
+  gap: 16px;
 }
 
 .backButton {
@@ -109,9 +109,15 @@
   transition: all 0.2s ease;
 }
 
-.backButton:hover {
+.backButton:hover:not([disabled]) {
   background: var(--foreground);
   color: var(--background);
+}
+
+.backButton[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--gray-alpha-100);
 }
 
 .overlay {
@@ -165,8 +171,8 @@
   }
 
   .playerButton {
-    width: 100px;
-    height: 100px;
+    width: 160px;
+    height: 160px;
     font-size: 1.25rem;
   }
 
