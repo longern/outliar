@@ -93,28 +93,8 @@
 }
 
 .playerNumberButton {
-  width: 100%;
-  aspect-ratio: 1;
-  font-size: 2rem;
-  font-weight: 700;
-  border: 2px solid var(--foreground);
-  border-radius: 12px;
-  background: var(--background);
-  color: var(--foreground);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-}
-
-.playerNumberButton:hover {
-  background: var(--gray-alpha-100);
-  transform: scale(1.05);
-}
-
-.playerNumberButton:active {
-  transform: scale(0.98);
+  /* Additional styles specific to player number buttons in Tool component */
+  /* Base styles are now in LongPressButton.module.css */
 }
 
 .backButton {

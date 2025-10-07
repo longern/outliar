@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import LongPressButton from "@/components/LongPressButton";
 import styles from "@/styles/Tool.module.css";
 
 export default function Tool() {
@@ -7,7 +8,7 @@ export default function Tool() {
   const [outliarNumber, setOutliarNumber] = useState<number>(1);
   const [fakeOutliarNumber, setFakeOutliarNumber] = useState<number>(2);
   const [revealedPlayer, setRevealedPlayer] = useState<number | null>(null);
-  const pressTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [viewedPlayers, setViewedPlayers] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     // Generate random outliar and fake outliar when entering view stage
@@ -19,6 +20,7 @@ export default function Tool() {
       }
       setOutliarNumber(outliar);
       setFakeOutliarNumber(fakeOutliar);
+      setViewedPlayers(new Set()); // Reset viewed players when entering view stage
     }
   }, [stage, playerCount]);
 
@@ -27,21 +29,9 @@ export default function Tool() {
     setStage("view");
   };
 
-  const handlePressStart = (playerNum: number) => {
-    pressTimerRef.current = setTimeout(() => {
-      setRevealedPlayer(playerNum);
-    }, 1000);
-  };
-
-  const handlePressEnd = () => {
-    if (pressTimerRef.current) {
-      clearTimeout(pressTimerRef.current);
-      pressTimerRef.current = null;
-    }
-  };
-
-  const handlePressCancel = () => {
-    handlePressEnd();
+  const handleLongPress = (playerNum: number) => {
+    setRevealedPlayer(playerNum);
+    setViewedPlayers((prev) => new Set(prev).add(playerNum));
   };
 
   const handleRevealClose = () => {
@@ -91,19 +81,15 @@ export default function Tool() {
         <div className={styles.playerGrid}>
           {Array.from({ length: playerCount }, (_, i) => i + 1).map(
             (playerNum) => (
-              <button
+              <LongPressButton
                 key={playerNum}
-                type="button"
+                onLongPress={() => handleLongPress(playerNum)}
+                duration={1000}
+                disabled={viewedPlayers.has(playerNum)}
                 className={styles.playerNumberButton}
-                onMouseDown={() => handlePressStart(playerNum)}
-                onMouseUp={handlePressEnd}
-                onMouseLeave={handlePressCancel}
-                onTouchStart={() => handlePressStart(playerNum)}
-                onTouchEnd={handlePressEnd}
-                onTouchCancel={handlePressCancel}
               >
                 {playerNum}
-              </button>
+              </LongPressButton>
             ),
           )}
         </div>

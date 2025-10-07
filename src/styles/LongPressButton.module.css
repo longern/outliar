@@ -1,0 +1,77 @@
+.longPressButton {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1;
+  font-size: 2rem;
+  font-weight: 700;
+  border: 2px solid var(--foreground);
+  border-radius: 12px;
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.longPressButton:hover {
+  background: var(--gray-alpha-100);
+  transform: scale(1.05);
+}
+
+.longPressButton:active {
+  transform: scale(0.98);
+}
+
+.longPressButton.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--gray-alpha-100);
+}
+
+.longPressButton.disabled:hover {
+  transform: none;
+}
+
+.progressBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--gray-rgb, 0, 0, 0), 0.3) 0%,
+    rgba(var(--gray-rgb, 0, 0, 0), 0.2) 100%
+  );
+  transition: none;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.longPressButton.pressing .progressBar {
+  animation: sweep 1s linear forwards;
+}
+
+@keyframes sweep {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Ensure the button content is above the progress bar */
+.longPressButton > *:not(.progressBar) {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .longPressButton {
+    font-size: 1.5rem;
+  }
+}
